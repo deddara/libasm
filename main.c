@@ -6,11 +6,14 @@
 /*   By: deddara <deddara@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/03 14:08:12 by deddara           #+#    #+#             */
-/*   Updated: 2020/09/03 14:08:13 by deddara          ###   ########.fr       */
+/*   Updated: 2020/09/03 14:15:29 by deddara          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int main()
-{
+#include "test.h"
 
+int main(void)
+{
+	printf("%zu", ft_strlen("-"));
+	return (0);
 }
