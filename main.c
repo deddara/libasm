@@ -6,7 +6,7 @@
 /*   By: deddara <deddara@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/03 14:08:12 by deddara           #+#    #+#             */
-/*   Updated: 2020/09/03 18:15:35 by deddara          ###   ########.fr       */
+/*   Updated: 2020/09/03 18:32:13 by deddara          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,12 +101,13 @@ static int strcpy_test2(char *src, int num)
 	printf("\033[36mtest source string : \"%s\"\n\033[0m", src);
 	if(!(dst = malloc(strlen(src) + 1)) || !(dst2 = malloc(strlen(src) + 1)))
 		printf("\033[31m[-] MALLOC ERROR\n\033[0m");
-	printf("strcpy: %5s %d\n", strcpy(dst, src), count_bytes(dst));
+	printf("strcpy: \033[33m%5s\033[0m [%d]\n", strcpy(dst, src), count_bytes(dst));
 	if (!(ft_strcpy(dst2, src)))
 		return(failure());
-	printf("ft_strcpy: %5s %d\n", dst2, count_bytes(dst2));
-	if (strcmp(dst2, dst) != 0)
+	printf("ft_strcpy: \033[33m%5s\033[0m [%d]\n", dst2, count_bytes(dst2));
+	if (strcmp(dst2, dst) != 0 || count_bytes(dst) != count_bytes(dst2))
 		return(failure());
+	printf("\033[32m[+] PASSED\n\n\033[0m");
 	free (dst);
 	free (dst2);
 	return (1);
@@ -114,7 +115,16 @@ static int strcpy_test2(char *src, int num)
 
 static int	strcpy_test()
 {
-	strcpy_test2("hello", 1);
+	if (!(strcpy_test2("hello", 1)))
+		return (0);
+	if (!(strcpy_test2("I wanna I got it", 2)))
+		return (0);
+	if (!(strcpy_test2("", 3)))
+		return (0);
+	if (!(strcpy_test2("r", 4)))
+		return (0);
+	if(!(strcpy_test2("I thought I had it all together But I was led astray The day you walked away You were the clock", 5)))
+		return (0);
 	return (1);
 }
 
