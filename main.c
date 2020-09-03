@@ -6,13 +6,33 @@
 /*   By: deddara <deddara@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/03 14:08:12 by deddara           #+#    #+#             */
-/*   Updated: 2020/09/03 16:22:06 by deddara          ###   ########.fr       */
+/*   Updated: 2020/09/03 18:15:35 by deddara          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "test.h"
 #include <string.h>
 #include <stdlib.h>
+
+static int count_bytes(char *str)
+{
+	int i;
+	
+	i = 0;
+	while (str[i])
+		i++;
+	if(str[i] == '\0')
+		i++;
+	return (i);
+}
+
+static int failure()
+{
+	printf("\033[31m[-] FAILURE\n\033[0m");
+	printf("\033[32m-------------------------------------------------\n\033[0m");
+	return (0);
+}
+
 static int strlen_test(void)
 {
 	int s;
@@ -25,11 +45,7 @@ static int strlen_test(void)
 	printf("strlen: %4d\n", s);
 	printf("ft_strlen: %d\n", ft_s);
 	if (s != ft_s)
-	{
-		printf("\033[31m[-] FAILURE\n\033[0m");
-		printf("\033[32m-------------------------------------------------\n\033[0m");
-		return (0);
-	}
+		failure();
 	else
 		printf("\033[32m[+] PASSED\n\n\033[0m");
 	
@@ -40,11 +56,7 @@ static int strlen_test(void)
 	printf("strlen: %4d\n", s);
 	printf("ft_strlen: %d\n", ft_s);
 	if (s != ft_s)
-	{
-		printf("\033[31m[-] FAILURE\n\033[0m");
-		printf("\033[32m-------------------------------------------------\n\033[0m");
-		return (0);
-	}
+		return(failure());
 	else
 		printf("\033[32m[+] PASSED\n\n\033[0m");
 	printf("\033[36m[3] \033[0m");
@@ -54,11 +66,7 @@ static int strlen_test(void)
 	printf("strlen: %5d\n", s);
 	printf("ft_strlen: %d\n", ft_s);
 	if (s != ft_s)
-	{
-		printf("\033[31m[-] FAILURE\n\033[0m");
-		printf("\033[32m-------------------------------------------------\n\033[0m");
-		return (0);
-	}
+		return(failure());
 	else
 		printf("\033[32m[+] PASSED\n\n\033[0m");
 	printf("\033[36m[4] \033[0m");
@@ -68,11 +76,7 @@ static int strlen_test(void)
 	printf("strlen: %4d\n", s);
 	printf("ft_strlen: %d\n", ft_s);
 	if (s != ft_s)
-	{
-		printf("\033[31m[-] FAILURE\n\033[0m");
-		printf("\033[32m-------------------------------------------------\n\033[0m");
-		return (0);
-	}
+		return(failure());
 	else
 		printf("\033[32m[+] PASSED\n\n\033[0m");
 	printf("\033[36m[5] \033[0m");
@@ -82,35 +86,35 @@ static int strlen_test(void)
 	printf("strlen: %5d\n", s);
 	printf("ft_strlen: %d\n", ft_s);
 	if (s != ft_s)
-	{
-		printf("\033[31m[-] FAILURE\n\033[0m");
-		printf("\033[32m-------------------------------------------------\n\033[0m");
-		return (0);
-	}
+		return(failure());
 	else
 		printf("\033[32m[+] PASSED\n\n\033[0m");
 	return (1);
 }
 
+static int strcpy_test2(char *src, int num)
+{
+	char *dst;
+	char *dst2 = NULL;
+	
+	printf("\033[36m[%d] \033[0m", num);
+	printf("\033[36mtest source string : \"%s\"\n\033[0m", src);
+	if(!(dst = malloc(strlen(src) + 1)) || !(dst2 = malloc(strlen(src) + 1)))
+		printf("\033[31m[-] MALLOC ERROR\n\033[0m");
+	printf("strcpy: %5s %d\n", strcpy(dst, src), count_bytes(dst));
+	if (!(ft_strcpy(dst2, src)))
+		return(failure());
+	printf("ft_strcpy: %5s %d\n", dst2, count_bytes(dst2));
+	if (strcmp(dst2, dst) != 0)
+		return(failure());
+	free (dst);
+	free (dst2);
+	return (1);
+}
+
 static int	strcpy_test()
 {
-	char *src;
-	char *dst;
-
-	src = "dafa";
-	dst = malloc (5);
-	printf("\033[36m[1] \033[0m");
-	printf("\033[36mtest string : \"hello\"\n\033[0m");
-	s = strlen("hello");
-	ft_s = ft_strlen("hello");
-	printf("strlen: %4d\n", s);
-	printf("ft_strlen: %d\n", ft_s);
-	if (s != ft_s)
-	{
-		printf("\033[31m[-] FAILURE\n\033[0m");
-		printf("\033[32m-------------------------------------------------\n\033[0m");
-		return (0);
-	}
+	strcpy_test2("hello", 1);
 	return (1);
 }
 
@@ -124,6 +128,7 @@ int main(void)
 	printf("\033[32m-------------------------------------------------\n\033[0m");
 
 	printf("\033[32m===STRCPY TEST===\n\033[0m");
+	printf("\033[32m-------------------------------------------------\n\033[0m");
 	if(!(strcpy_test()))
 		return (0);
 	printf("\033[32m-------------------------------------------------\n\033[0m");
