@@ -6,7 +6,7 @@
 #    By: deddara <deddara@student.21-school.ru>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/09/03 12:53:27 by deddara           #+#    #+#              #
-#    Updated: 2020/09/03 14:13:59 by deddara          ###   ########.fr        #
+#    Updated: 2020/09/03 15:56:57 by deddara          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -40,7 +40,7 @@ clean:
 	@rm -rf $(OBJ_DIR)
 fclean: clean
 	@rm -f $(NAME)
-	@rm -f test
+	@rm -f run_test
 
 .PHONY: test
 test: $(TEST)
