@@ -6,7 +6,7 @@
 /*   By: deddara <deddara@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/03 14:08:12 by deddara           #+#    #+#             */
-/*   Updated: 2020/09/03 16:12:16 by deddara          ###   ########.fr       */
+/*   Updated: 2020/09/03 16:22:06 by deddara          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,6 +94,23 @@ static int strlen_test(void)
 
 static int	strcpy_test()
 {
+	char *src;
+	char *dst;
+
+	src = "dafa";
+	dst = malloc (5);
+	printf("\033[36m[1] \033[0m");
+	printf("\033[36mtest string : \"hello\"\n\033[0m");
+	s = strlen("hello");
+	ft_s = ft_strlen("hello");
+	printf("strlen: %4d\n", s);
+	printf("ft_strlen: %d\n", ft_s);
+	if (s != ft_s)
+	{
+		printf("\033[31m[-] FAILURE\n\033[0m");
+		printf("\033[32m-------------------------------------------------\n\033[0m");
+		return (0);
+	}
 	return (1);
 }
 
