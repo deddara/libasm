@@ -6,7 +6,7 @@
 /*   By: deddara <deddara@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/03 14:08:12 by deddara           #+#    #+#             */
-/*   Updated: 2020/09/03 15:56:18 by deddara          ###   ########.fr       */
+/*   Updated: 2020/09/03 16:12:16 by deddara          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,12 +92,22 @@ static int strlen_test(void)
 	return (1);
 }
 
+static int	strcpy_test()
+{
+	return (1);
+}
+
 int main(void)
 {
 	/* STRLEN TEST */
 	printf("\033[32m===STRLEN TEST===\n\033[0m");
 	printf("\033[32m-------------------------------------------------\n\033[0m");
 	if(!(strlen_test()))
+		return (0);
+	printf("\033[32m-------------------------------------------------\n\033[0m");
+
+	printf("\033[32m===STRCPY TEST===\n\033[0m");
+	if(!(strcpy_test()))
 		return (0);
 	printf("\033[32m-------------------------------------------------\n\033[0m");
 	return (0);
