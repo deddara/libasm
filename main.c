@@ -6,7 +6,7 @@
 /*   By: deddara <deddara@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/03 14:08:12 by deddara           #+#    #+#             */
-/*   Updated: 2020/09/03 20:00:18 by deddara          ###   ########.fr       */
+/*   Updated: 2020/09/03 20:36:58 by deddara          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,6 +102,40 @@ static int	strcpy_test()
 	return (1);
 }
 
+static int	strcmp2_test(const char *s1, const char *s2, int num)
+{
+	int res;
+	int res2;
+	printf("\033[36m[%d] \033[0m", num);
+	printf("\033[36mtest strings : \033[35m\"%s\"\033[0m and  \033[35m\"%s\"\033[0m\n\033[0m", s1, s2);
+	res = strcmp(s1, s2);
+	res2 = ft_strcmp(s1, s2);
+	printf("strcmp: %4d\n", res);
+	printf("ft_strcmp: %d\n", res2);
+	if (res != res2)
+		return (failure());
+	printf("\033[32m[+] PASSED\n\n\033[0m");
+	return (1);
+}
+
+static int	strcmp_test()
+{
+	strcmp2_test("Hello, it's me", "Hello, it's me", 1);
+	strcmp2_test("", "", 2);
+	strcmp2_test("y", "y", 3);
+	strcmp2_test("1", "", 4);
+	strcmp2_test("i did it wrong", "i did it right", 5);
+	strcmp2_test("da", "a", 6);
+	strcmp2_test("da", "d", 6);
+	strcmp2_test("da", "da ", 6);
+	strcmp2_test("da ", "da", 6);
+	strcmp2_test("a", "da", 6);
+	strcmp2_test("mama", "mada", 6);
+	strcmp2_test("lolo", "olol", 6);
+	strcmp2_test("     ", "     ", 6);
+	return (1);
+}
+
 int main(void)
 {
 	/* STRLEN TEST */
@@ -116,8 +150,10 @@ int main(void)
 	if(!(strcpy_test()))
 		return (0);
 	printf("\033[32m-------------------------------------------------\n\033[0m");
-	char *s1 = "dd";
-	char *s2 = "d";
-	printf("%d", ft_strcmp(s1, s2));
+	printf("\033[32m===STRCMP TEST===\n\033[0m");
+	printf("\033[32m-------------------------------------------------\n\033[0m");
+	if(!(strcmp_test()))
+		return (0);
+	printf("\033[32m-------------------------------------------------\n\033[0m");
 	return (0);
 }
