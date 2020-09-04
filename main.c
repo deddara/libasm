@@ -6,7 +6,7 @@
 /*   By: deddara <deddara@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/03 14:08:12 by deddara           #+#    #+#             */
-/*   Updated: 2020/09/04 13:14:23 by deddara          ###   ########.fr       */
+/*   Updated: 2020/09/04 14:01:42 by deddara          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,16 +70,16 @@ static int strlen_test(void)
 
 static int strcpy_test2(char *src, int num)
 {
-	char *dst;
+	char *dst = NULL;
 	char *dst2 = NULL;
 	
 	printf("\033[36m[%d] \033[0m", num);
 	printf("\033[36mtest source string : \"%s\"\n\033[0m", src);
-	if(!(dst = malloc(strlen(src) + 1)) || !(dst2 = malloc(strlen(src) + 1)))
-		printf("\033[31m[-] MALLOC ERROR\n\033[0m");
-	printf("strcpy: \033[33m%5s\033[0m [%d]\n", strcpy(dst, src), count_bytes(dst));
-	if (!(ft_strcpy(dst2, src)))
-		return(failure());
+	dst = malloc(strlen(src) + 1);
+	dst2 = malloc(strlen(src) + 1);
+	strcpy(dst, src);
+	printf("strcpy: \033[33m%5s\033[0m [%d]\n", dst, count_bytes(dst));
+	ft_strcpy(dst2, src);
 	printf("ft_strcpy: \033[33m%5s\033[0m [%d]\n", dst2, count_bytes(dst2));
 	if (strcmp(dst2, dst) != 0 || count_bytes(dst) != count_bytes(dst2))
 		return(failure());
@@ -217,6 +217,31 @@ static int read_test()
 	return (1);
 }
 
+static int strdup_test2(char *src, int num)
+{
+	char *buf;
+
+	buf = NULL;
+	num = 0;
+	buf = strdup(src);
+	printf("strdup: %s\n", buf);
+	free (buf);
+	buf = ft_strdup(src);
+	printf("ft_strdup: %s\n", buf);
+	printf("\033[32m[+] PASSED\n\n\033[0m");
+	free (buf);
+	return(1);
+}
+
+static int strdup_test()
+{
+	strdup_test2("Hell yeah...", 1);
+	strdup_test2("Devil is coming", 2);
+	strdup_test2("", 3);
+	strdup_test2("Don't you want go to bed with me?", 4);
+	return (1);
+}
+
 int main(void)
 {
 	/* STRLEN TEST */
@@ -247,6 +272,12 @@ int main(void)
 	printf("\033[32m===READ TEST===\n\033[0m");
 	printf("\033[32m-------------------------------------------------\n\033[0m");
 	if(!(read_test()))
+		return (0);
+	printf("\033[32m-------------------------------------------------\n\033[0m");
+	
+	printf("\033[32m===STRDUP TEST===\n\033[0m");
+	printf("\033[32m-------------------------------------------------\n\033[0m");
+	if(!(strdup_test()))
 		return (0);
 	printf("\033[32m-------------------------------------------------\n\033[0m");
 	return (0);

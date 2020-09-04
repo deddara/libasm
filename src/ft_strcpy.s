@@ -6,10 +6,10 @@ _ft_strcpy:
 
 .loop:
 	mov dl, byte [rsi]
-	mov byte [rax], dl
-	cmp byte [rax], 0
+	mov byte [rdi], dl
+	cmp dl, 0
 	je .end
-	inc rax
+	inc rdi
 	inc rsi
 	jmp .loop
 
