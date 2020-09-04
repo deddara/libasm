@@ -6,7 +6,7 @@
 /*   By: deddara <deddara@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/03 14:08:12 by deddara           #+#    #+#             */
-/*   Updated: 2020/09/04 12:33:20 by deddara          ###   ########.fr       */
+/*   Updated: 2020/09/04 12:45:44 by deddara          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #include <string.h>
 #include <stdlib.h>
 #include <errno.h>
+#include <fcntl.h>
 
 static int count_bytes(char *str)
 {
@@ -161,10 +162,20 @@ static int write_test2(int fd, char *src, int size, int num)
 
 static int write_test()
 {
+	int fd;
+	fd = open("test.txt", O_RDWR);
 	write_test2(1, "fuq", 3, 1);
 	write_test2(-1, "fuq", 3, 1);
 	write_test2(1, "aep", 3, 1);
 	write_test2(2, "snake", 3, 1);
+	write(fd, "esketit\n", 8);
+	ft_write(fd, "esketit", 7);
+	return (1);
+}
+
+static int read_test()
+{
+	// read_test2();
 	return (1);
 }
 
@@ -197,7 +208,7 @@ int main(void)
 
 	printf("\033[32m===READ TEST===\n\033[0m");
 	printf("\033[32m-------------------------------------------------\n\033[0m");
-	if(!(write_test()))
+	if(!(read_test()))
 		return (0);
 	printf("\033[32m-------------------------------------------------\n\033[0m");
 	return (0);
