@@ -6,14 +6,14 @@
 #    By: deddara <deddara@student.21-school.ru>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/09/03 12:53:27 by deddara           #+#    #+#              #
-#    Updated: 2020/09/03 15:56:57 by deddara          ###   ########.fr        #
+#    Updated: 2020/09/04 13:05:40 by deddara          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = libasm.a
 TEST = run_test
 NASM_FLGS = nasm -f macho64
-GCC_FLGS = gcc -Wall -Wextra -Werror -I./
+GCC_FLGS = gcc -Wall -Wextra -I./
 OBJ_DIR = obj/
 
 .PHONY: all clean fclean

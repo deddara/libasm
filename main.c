@@ -6,7 +6,7 @@
 /*   By: deddara <deddara@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/03 14:08:12 by deddara           #+#    #+#             */
-/*   Updated: 2020/09/04 12:45:44 by deddara          ###   ########.fr       */
+/*   Updated: 2020/09/04 13:14:23 by deddara          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -142,11 +142,13 @@ static int write_test2(int fd, char *src, int size, int num)
 {
 	int er_w;
 	int er_ft;
+	errno = 0;
 	printf("\033[36m[%d] \033[0m", num);
 	printf("\033[36mfd = %d, buf = %s, size = %d: \n\033[0m", fd, src, size);
 	write(1, "write:    ", 10);
 	write(fd, src, size);
 	er_w = errno;
+	errno = 0;
 	write(1, "\n", 1);
 	write(1, "ft_write: ", 10);
 	ft_write(fd, src, size);
@@ -165,17 +167,53 @@ static int write_test()
 	int fd;
 	fd = open("test.txt", O_RDWR);
 	write_test2(1, "fuq", 3, 1);
-	write_test2(-1, "fuq", 3, 1);
-	write_test2(1, "aep", 3, 1);
-	write_test2(2, "snake", 3, 1);
+	write_test2(-1, "fuq", 3, 2);
+	write_test2(1, "aep", 3, 3);
+	write_test2(2, "snake", 3, 4);
 	write(fd, "esketit\n", 8);
 	ft_write(fd, "esketit", 7);
 	return (1);
 }
 
+static int read_test2(int fd, int fd_ft, char *buf, char *buf_ft, int size, int num)
+{
+	int er_w;
+	int er_ft;
+
+	errno = 0;
+	printf("\033[36m[%d] \033[0m", num);
+	printf("\033[36msize = %d: \n\033[0m", size);
+	read(fd, buf, size);
+	er_w = errno;
+	errno = 0;
+	printf("read: %s\n", buf);
+	ft_read(fd_ft, buf_ft, size);
+	er_ft = errno;
+	printf("ft_read: %s\n", buf_ft);
+	printf("errno : \033[31m%d, %d\n\033[0m", er_w, er_ft);
+	if (er_w != er_ft)
+		return(failure());
+	printf("\033[32m[+] PASSED\n\n\033[0m");
+	return (1);
+}
+
 static int read_test()
 {
-	// read_test2();
+	char buf[100];
+	char buf_ft[100];
+	bzero(buf, 100);
+	bzero(buf_ft, 100);
+	int fd;
+	int fd_ft;
+	
+	errno = 0;
+	fd = open("read.txt", O_RDWR);
+	fd_ft = open("read.txt", O_RDWR);
+	read_test2(fd, fd_ft, buf, buf_ft, 3, 1);
+	read_test2(fd, fd_ft, buf, buf_ft, 5, 2);
+	read_test2(-1, -1, buf, buf_ft, 5, 3);
+	read_test2(fd, fd_ft, buf, buf_ft, 10, 4);
+	read_test2(fd, fd_ft, buf, buf_ft, 3, 5);
 	return (1);
 }
 

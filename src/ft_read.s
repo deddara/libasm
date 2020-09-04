@@ -2,10 +2,10 @@ section .text
 global _ft_read
 extern ___error
 
-_ft_write:
+_ft_read:
 	xor rax, rax
 
-.write:
+.read:
 	mov rax, 0x2000003
 	syscall
 	jc .err
