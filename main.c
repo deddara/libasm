@@ -6,7 +6,7 @@
 /*   By: deddara <deddara@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/03 14:08:12 by deddara           #+#    #+#             */
-/*   Updated: 2020/09/04 12:28:51 by deddara          ###   ########.fr       */
+/*   Updated: 2020/09/04 12:33:20 by deddara          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -161,7 +161,10 @@ static int write_test2(int fd, char *src, int size, int num)
 
 static int write_test()
 {
-	write_test2(1, "fds", 3, 1);
+	write_test2(1, "fuq", 3, 1);
+	write_test2(-1, "fuq", 3, 1);
+	write_test2(1, "aep", 3, 1);
+	write_test2(2, "snake", 3, 1);
 	return (1);
 }
 
@@ -187,6 +190,12 @@ int main(void)
 	printf("\033[32m-------------------------------------------------\n\033[0m");
 	
 	printf("\033[32m===WRITE TEST===\n\033[0m");
+	printf("\033[32m-------------------------------------------------\n\033[0m");
+	if(!(write_test()))
+		return (0);
+	printf("\033[32m-------------------------------------------------\n\033[0m");
+
+	printf("\033[32m===READ TEST===\n\033[0m");
 	printf("\033[32m-------------------------------------------------\n\033[0m");
 	if(!(write_test()))
 		return (0);
