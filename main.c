@@ -6,13 +6,14 @@
 /*   By: deddara <deddara@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/03 14:08:12 by deddara           #+#    #+#             */
-/*   Updated: 2020/09/03 20:36:58 by deddara          ###   ########.fr       */
+/*   Updated: 2020/09/04 11:26:07 by deddara          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "test.h"
 #include <string.h>
 #include <stdlib.h>
+#include <errno.h>
 
 static int count_bytes(char *str)
 {
@@ -139,6 +140,7 @@ static int	strcmp_test()
 int main(void)
 {
 	/* STRLEN TEST */
+	ssize_t j;
 	printf("\033[32m===STRLEN TEST===\n\033[0m");
 	printf("\033[32m-------------------------------------------------\n\033[0m");
 	if(!(strlen_test()))
@@ -155,5 +157,8 @@ int main(void)
 	if(!(strcmp_test()))
 		return (0);
 	printf("\033[32m-------------------------------------------------\n\033[0m");
+	j = ft_write(-1, "dfds", 4);
+	printf("%d",errno);
+	printf("%zd", j);
 	return (0);
 }
