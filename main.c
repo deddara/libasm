@@ -6,7 +6,7 @@
 /*   By: deddara <deddara@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/03 14:08:12 by deddara           #+#    #+#             */
-/*   Updated: 2020/09/04 14:01:42 by deddara          ###   ########.fr       */
+/*   Updated: 2020/09/04 14:03:34 by deddara          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -165,7 +165,7 @@ static int write_test2(int fd, char *src, int size, int num)
 static int write_test()
 {
 	int fd;
-	fd = open("test.txt", O_RDWR);
+	fd = open("test.txt", O_RDWR | O_CREAT, 0755);
 	write_test2(1, "fuq", 3, 1);
 	write_test2(-1, "fuq", 3, 2);
 	write_test2(1, "aep", 3, 3);
