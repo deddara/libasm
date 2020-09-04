@@ -6,7 +6,7 @@
 /*   By: deddara <deddara@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/03 14:08:12 by deddara           #+#    #+#             */
-/*   Updated: 2020/09/04 11:59:08 by deddara          ###   ########.fr       */
+/*   Updated: 2020/09/04 12:28:51 by deddara          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -137,10 +137,37 @@ static int	strcmp_test()
 	return (1);
 }
 
+static int write_test2(int fd, char *src, int size, int num)
+{
+	int er_w;
+	int er_ft;
+	printf("\033[36m[%d] \033[0m", num);
+	printf("\033[36mfd = %d, buf = %s, size = %d: \n\033[0m", fd, src, size);
+	write(1, "write:    ", 10);
+	write(fd, src, size);
+	er_w = errno;
+	write(1, "\n", 1);
+	write(1, "ft_write: ", 10);
+	ft_write(fd, src, size);
+	er_ft = errno;
+	write(1, "\n", 1);
+
+	printf("errno : \033[31m%d, %d\n\033[0m", er_w, er_ft);
+	if (er_w != er_ft)
+		return(failure());
+	printf("\033[32m[+] PASSED\n\n\033[0m");
+	return (1);
+}
+
+static int write_test()
+{
+	write_test2(1, "fds", 3, 1);
+	return (1);
+}
+
 int main(void)
 {
 	/* STRLEN TEST */
-	char *st;
 	printf("\033[32m===STRLEN TEST===\n\033[0m");
 	printf("\033[32m-------------------------------------------------\n\033[0m");
 	if(!(strlen_test()))
@@ -152,12 +179,17 @@ int main(void)
 	if(!(strcpy_test()))
 		return (0);
 	printf("\033[32m-------------------------------------------------\n\033[0m");
+	
 	printf("\033[32m===STRCMP TEST===\n\033[0m");
 	printf("\033[32m-------------------------------------------------\n\033[0m");
 	if(!(strcmp_test()))
 		return (0);
 	printf("\033[32m-------------------------------------------------\n\033[0m");
-	st = strdup("dfdsa");
-	printf("==%s==", st);
+	
+	printf("\033[32m===WRITE TEST===\n\033[0m");
+	printf("\033[32m-------------------------------------------------\n\033[0m");
+	if(!(write_test()))
+		return (0);
+	printf("\033[32m-------------------------------------------------\n\033[0m");
 	return (0);
 }
