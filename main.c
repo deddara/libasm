@@ -6,7 +6,7 @@
 /*   By: deddara <deddara@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/03 14:08:12 by deddara           #+#    #+#             */
-/*   Updated: 2020/09/04 14:03:34 by deddara          ###   ########.fr       */
+/*   Updated: 2020/09/07 20:02:24 by deddara          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 #include <stdlib.h>
 #include <errno.h>
 #include <fcntl.h>
-
 static int count_bytes(char *str)
 {
 	int i;
@@ -242,6 +241,27 @@ static int strdup_test()
 	return (1);
 }
 
+static t_list *new_lst()
+{
+	t_list *tmp;
+	tmp = malloc(sizeof(t_list) * 1);
+	tmp->next = NULL;
+	return (tmp);
+}
+
+static int	lstsize_test()
+{
+	int i;
+
+	t_list *list;
+	list = new_lst();
+	list->next = new_lst();
+	list->next->next = new_lst();
+	i = ft_list_size(list);
+	printf("LEN = %d\n", i);
+	return (1);
+}
+
 int main(void)
 {
 	/* STRLEN TEST */
@@ -278,6 +298,12 @@ int main(void)
 	printf("\033[32m===STRDUP TEST===\n\033[0m");
 	printf("\033[32m-------------------------------------------------\n\033[0m");
 	if(!(strdup_test()))
+		return (0);
+	printf("\033[32m-------------------------------------------------\n\033[0m");
+	
+	printf("\033[32m===LSTSIZE TEST===\n\033[0m");
+	printf("\033[32m-------------------------------------------------\n\033[0m");
+	if(!(lstsize_test()))
 		return (0);
 	printf("\033[32m-------------------------------------------------\n\033[0m");
 	return (0);

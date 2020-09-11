@@ -6,7 +6,7 @@
 #    By: deddara <deddara@student.21-school.ru>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/09/03 12:53:27 by deddara           #+#    #+#              #
-#    Updated: 2020/09/04 13:05:40 by deddara          ###   ########.fr        #
+#    Updated: 2020/09/07 20:18:43 by deddara          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@ NASM_FLGS = nasm -f macho64
 GCC_FLGS = gcc -Wall -Wextra -I./
 OBJ_DIR = obj/
 
-.PHONY: all clean fclean
+.PHONY: all clean fclean re
 
 NASM_DIR = src/
 NASM_SRC = $(wildcard $(NASM_DIR)*.s)
@@ -42,8 +42,14 @@ fclean: clean
 	@rm -f $(NAME)
 	@rm -f run_test
 
+re: fclean all
+
 .PHONY: test
 test: $(TEST)
+
+.PHONY: bonus
+
+bonus: all
 
 $(TEST): $(TEST_SRC.O) $(NAME)
 	$(GCC_FLGS) $(TEST_SRC.O) $(NAME) -o $(TEST)
